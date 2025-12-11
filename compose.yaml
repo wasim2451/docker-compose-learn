@@ -1,0 +1,9 @@
+name: my-web-server
+
+services:
+  myweb:                     # Name of the service
+    image: nginx:alpine    # The image to download and use
+    ports:
+      - "3000:80"          # Map Host Port (8080) -> Container Port (80)
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html  # Mount our file into the container
