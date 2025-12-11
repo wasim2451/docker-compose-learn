@@ -3,153 +3,1392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker Documentation</title>
+    <title>Docker Documentation Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" type="image/png">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f8f9fa;
+            box-sizing: border-box;
         }
-        header {
-            background: #2496ed;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+
+        :root {
+            --docker-blue: #0db7ed;
+            --docker-dark-blue: #384d54;
+            --docker-navy: #1d63ed;
+            --bg-dark: #0f1419;
+            --bg-card: #1a2332;
+            --text-light: #ffffff;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --gradient-start: #0db7ed;
+            --gradient-end: #1d63ed;
         }
-        .container {
-            max-width: 1200px;
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
         .logo {
-            max-width: 200px;
-            height: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-light);
         }
-        h1, h2, h3 {
-            color: #2496ed;
+
+        .logo img {
+            height: 40px;
         }
-        .hero {
-            text-align: center;
-            padding: 2rem 0;
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
-        .hero p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-        }
-        .section {
-            padding: 2rem 0;
-            background: white;
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .section img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 1rem auto;
-        }
-        .links {
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
             list-style: none;
-            padding: 0;
         }
-        .links li {
-            margin: 1rem 0;
-        }
-        .links a {
-            color: #2496ed;
+
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
         }
-        .links a:hover {
-            text-decoration: underline;
+
+        .nav-links a:hover {
+            color: var(--docker-blue);
         }
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            background: #2496ed;
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(13, 183, 237, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(180deg, rgba(13, 183, 237, 0.1) 0%, transparent 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero img {
+            height: 120px;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-light), var(--docker-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(13, 183, 237, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--docker-blue);
+            border: 2px solid var(--docker-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--docker-blue);
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 3rem 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--docker-blue);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* What is Docker */
+        .what-is-docker {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .docker-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .docker-intro img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+        }
+
+        .docker-intro h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--docker-blue);
+        }
+
+        .docker-intro p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Core Concepts */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .concept-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--docker-blue);
+        }
+
+        .concept-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .concept-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .concept-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Commands Section */
+        .commands-section {
+            background: linear-gradient(180deg, transparent, rgba(13, 183, 237, 0.05));
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .command-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .command-header {
+            background: rgba(13, 183, 237, 0.1);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .command-header h4 {
+            color: var(--docker-blue);
+            font-size: 1rem;
+        }
+
+        .command-body {
+            padding: 1.5rem;
+        }
+
+        .command-code {
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            color: #58a6ff;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .command-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            text-align: center;
+        }
+
+        .architecture-img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--docker-blue);
+            box-shadow: 0 15px 40px rgba(13, 183, 237, 0.2);
+        }
+
+        .resource-card img {
+            height: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            color: var(--docker-blue);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Installation Section */
+        .install-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .install-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .install-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+
+        .install-card:hover {
+            border-color: var(--docker-blue);
+            transform: scale(1.02);
+        }
+
+        .install-card img {
+            height: 80px;
+            margin-bottom: 1.5rem;
+        }
+
+        .install-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .install-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Dockerfile Example */
+        .dockerfile-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .dockerfile-example {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .dockerfile-header {
+            background: rgba(13, 183, 237, 0.1);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dockerfile-header span {
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27ca40; }
+
+        .dockerfile-code {
+            padding: 1.5rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .dockerfile-code .comment { color: #6a737d; }
+        .dockerfile-code .instruction { color: #f97583; }
+        .dockerfile-code .value { color: #9ecbff; }
+
+        .dockerfile-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--docker-blue);
+        }
+
+        .dockerfile-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .dockerfile-info ul {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .dockerfile-info li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dockerfile-info li::before {
+            content: "→";
+            color: var(--docker-blue);
+        }
+
+        /* Docker Compose */
+        .compose-section {
+            background: linear-gradient(180deg, rgba(13, 183, 237, 0.05), transparent);
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            margin-bottom: 0.8rem;
+        }
+
+        .benefit-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: rgba(13, 183, 237, 0.1);
+            font-weight: 600;
+            color: var(--docker-blue);
+        }
+
+        .comparison-table td {
+            color: var(--text-muted);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 1.5rem;
+            background: var(--bg-dark);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .quick-link:hover {
+            border-color: var(--docker-blue);
+            transform: translateX(5px);
+        }
+
+        .quick-link span {
+            color: var(--docker-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: var(--docker-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--docker-blue);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--docker-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .docker-intro,
+            .dockerfile-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .what-is-docker,
+            .install-section {
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(13, 183, 237, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Code highlight */
+        code {
+            background: var(--bg-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            color: #f97583;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <img src="https://logo.svgcdn.com/logos/docker.png" alt="Docker Logo" class="logo">
-            <h1>Docker Documentation</h1>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Logo">
+                <span>Docker Docs</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#what-is-docker">About</a></li>
+                <li><a href="#concepts">Concepts</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#install">Install</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+            <a href="https://hub.docker.com/" target="_blank" class="nav-cta">Docker Hub →</a>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <section class="hero">
-            <h2>Welcome to Docker Documentation</h2>
-            <p>
-                Docker is a platform for developing, shipping, and running applications in containers.
-                Containers allow you to package an application with all its dependencies into a standardized unit,
-                ensuring that your application runs consistently in any environment.
-            </p>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker">
+            <h1>Docker Documentation Hub</h1>
+            <p>Learn how to build, share, and run applications using containers. Docker makes development efficient and predictable.</p>
+            <div class="hero-buttons">
+                <a href="https://docs.docker.com/get-started/" target="_blank" class="btn btn-primary">
+                    📖 Get Started
+                </a>
+                <a href="https://www.docker.com/products/docker-desktop/" target="_blank" class="btn btn-secondary">
+                    ⬇️ Download Docker
+                </a>
+            </div>
+        </div>
+    </section>
 
-        <section class="section">
-            <h2>What is Docker?</h2>
-            <p>
-                Docker is an open platform for developing, shipping, and running applications.
-                It enables you to separate your applications from your infrastructure so you can deliver software quickly.
-                With Docker, you can manage your infrastructure in the same ways you manage your applications.
-            </p>
-            <p>
-                Docker provides the ability to package and run an application in a loosely isolated environment called a container.
-                The isolation and security allow you to run many containers simultaneously on a given host.
-            </p>
-        </section>
-
-        <section class="section">
-            <h2>Docker Architecture</h2>
-            <p>
-                Docker uses a client-server architecture. The Docker client talks to the Docker daemon,
-                which does the heavy lifting of building, running, and distributing your Docker containers.
-                The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon.
-            </p>
-            <img src="https://docs.docker.com/get-started/images/docker-architecture.webp" alt="Docker Architecture Diagram">
-            <p>
-                The Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes.
-                A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker is configured to look for images on Docker Hub by default.
-            </p>
-        </section>
-
-        <section class="section">
-            <h2>Key Features</h2>
-            <ul>
-                <li><strong>Containers:</strong> Lightweight, portable, and self-sufficient environments for running applications.</li>
-                <li><strong>Images:</strong> Read-only templates used to create containers.</li>
-                <li><strong>Docker Hub:</strong> A cloud-based registry service for sharing and managing container images.</li>
-                <li><strong>Docker Compose:</strong> A tool for defining and running multi-container Docker applications.</li>
-                <li><strong>Docker Swarm:</strong> Native clustering for Docker, turning a pool of Docker hosts into a single, virtual Docker host.</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>Further Reading & Resources</h2>
-            <ul class="links">
-                <li><a href="https://docs.docker.com/get-started/docker-overview/" target="_blank">Docker Overview</a></li>
-                <li><a href="https://docs.docker.com/get-started/" target="_blank">Get Started with Docker</a></li>
-                <li><a href="https://docs.docker.com/engine/reference/commandline/cli/" target="_blank">Docker CLI Reference</a></li>
-                <li><a href="https://docs.docker.com/compose/" target="_blank">Docker Compose Documentation</a></li>
-                <li><a href="https://docs.docker.com/engine/swarm/" target="_blank">Docker Swarm Documentation</a></li>
-                <li><a href="https://hub.docker.com/" target="_blank">Docker Hub</a></li>
-                <li><a href="https://www.docker.com/community" target="_blank">Docker Community</a></li>
-            </ul>
-        </section>
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-number">13M+</div>
+            <div class="stat-label">Developers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">7M+</div>
+            <div class="stat-label">Applications</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">13B+</div>
+            <div class="stat-label">Monthly Downloads</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100K+</div>
+            <div class="stat-label">Container Images</div>
+        </div>
     </div>
 
+    <!-- What is Docker -->
+    <div class="what-is-docker" id="what-is-docker">
+        <div class="docker-intro">
+            <div>
+                <h2>What is Docker?</h2>
+                <p>Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.</p>
+                <p>With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker's methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.</p>
+                <p style="margin-top: 1.5rem;">
+                    <a href="https://docs.docker.com/get-started/overview/" target="_blank" class="btn btn-secondary">Learn More →</a>
+                </p>
+            </div>
+            <img src="https://www.docker.com/wp-content/uploads/2021/11/docker-containerized-appliction-blue-border_2.png" alt="Docker Containers">
+        </div>
+    </div>
+
+    <!-- Core Concepts -->
+    <section id="concepts">
+        <div class="section-title">
+            <h2>Core Concepts</h2>
+            <p>Understanding the fundamental building blocks of Docker</p>
+        </div>
+        <div class="concepts-grid">
+            <div class="concept-card">
+                <div class="concept-icon">📦</div>
+                <h3>Containers</h3>
+                <p>A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon">🖼️</div>
+                <h3>Images</h3>
+                <p>A Docker image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon">📄</div>
+                <h3>Dockerfile</h3>
+                <p>A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build, users can create an automated build.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon">🔗</div>
+                <h3>Docker Compose</h3>
+                <p>Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon">💾</div>
+                <h3>Volumes</h3>
+                <p>Volumes are the preferred mechanism for persisting data generated by and used by Docker containers. They are completely managed by Docker.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon">🌐</div>
+                <h3>Networks</h3>
+                <p>Docker networking enables containers to communicate with each other and with the outside world. Docker creates isolated networks for secure container communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Docker Architecture -->
+    <section class="architecture">
+        <div class="section-title">
+            <h2>Docker Architecture</h2>
+            <p>Understanding how Docker works under the hood</p>
+        </div>
+        <img src="https://docs.docker.com/get-started/images/docker-architecture.webp" alt="Docker Architecture" class="architecture-img">
+    </section>
+
+    <!-- Benefits -->
+    <section>
+        <div class="section-title">
+            <h2>Why Use Docker?</h2>
+            <p>Key benefits that make Docker the industry standard for containerization</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🚀</div>
+                <h3>Fast Deployment</h3>
+                <p>Containers can be deployed in seconds, making it easy to scale applications up or down.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💻</div>
+                <h3>Consistency</h3>
+                <p>Docker ensures consistency across multiple development, testing, and production environments.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📦</div>
+                <h3>Isolation</h3>
+                <p>Each container runs in isolation, ensuring that different applications don't interfere with each other.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Resource Efficient</h3>
+                <p>Containers share the host OS kernel, making them much lighter than virtual machines.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🔄</div>
+                <h3>Portability</h3>
+                <p>Build once, run anywhere. Docker containers can run on any system that supports Docker.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Security</h3>
+                <p>Containers provide process isolation and can be configured with security policies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands Section -->
+    <section id="commands" class="commands-section">
+        <div class="section-title">
+            <h2>Essential Docker Commands</h2>
+            <p>The most commonly used Docker commands to get you started</p>
+        </div>
+        <div class="commands-grid">
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>Pull an Image</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker pull nginx:latest</div>
+                    <p>Download an image from Docker Hub or another registry.</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>Run a Container</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker run -d -p 80:80 nginx</div>
+                    <p>Create and start a container from an image.</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>List Containers</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker ps -a</div>
+                    <p>List all containers (running and stopped).</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>Build an Image</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker build -t myapp:1.0 .</div>
+                    <p>Build an image from a Dockerfile in the current directory.</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>Stop Container</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker stop container_id</div>
+                    <p>Stop a running container gracefully.</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>Remove Container</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker rm container_id</div>
+                    <p>Remove a stopped container.</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>View Logs</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker logs -f container_id</div>
+                    <p>Fetch and follow the logs of a container.</p>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>Execute Command</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker exec -it container_id bash</div>
+                    <p>Run a command inside a running container.</p>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem;">
+            <a href="https://docs.docker.com/engine/reference/commandline/cli/" target="_blank" class="btn btn-secondary">View All Commands →</a>
+        </p>
+    </section>
+
+    <!-- Dockerfile Example -->
+    <section>
+        <div class="dockerfile-section">
+            <div class="dockerfile-info">
+                <h3>Writing a Dockerfile</h3>
+                <p>A Dockerfile is a text document containing instructions to build a Docker image. Each instruction creates a layer in the image.</p>
+                <p>Best practices for Dockerfiles include:</p>
+                <ul>
+                    <li>Use official base images when possible</li>
+                    <li>Minimize the number of layers</li>
+                    <li>Use multi-stage builds for smaller images</li>
+                    <li>Don't install unnecessary packages</li>
+                    <li>Use .dockerignore file</li>
+                    <li>Sort multi-line arguments</li>
+                </ul>
+                <p style="margin-top: 2rem;">
+                    <a href="https://docs.docker.com/engine/reference/builder/" target="_blank" class="btn btn-primary">Dockerfile Reference →</a>
+                </p>
+            </div>
+            <div class="dockerfile-example">
+                <div class="dockerfile-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span style="margin-left: 1rem;">Dockerfile</span>
+                </div>
+                <pre class="dockerfile-code">
+<span class="comment"># Use an official Node.js runtime as base</span>
+<span class="instruction">FROM</span> <span class="value">node:18-alpine</span>
+
+<span class="comment"># Set the working directory</span>
+<span class="instruction">WORKDIR</span> <span class="value">/app</span>
+
+<span class="comment"># Copy package files</span>
+<span class="instruction">COPY</span> <span class="value">package*.json ./</span>
+
+<span class="comment"># Install dependencies</span>
+<span class="instruction">RUN</span> <span class="value">npm ci --only=production</span>
+
+<span class="comment"># Copy application code</span>
+<span class="instruction">COPY</span> <span class="value">. .</span>
+
+<span class="comment"># Expose port 3000</span>
+<span class="instruction">EXPOSE</span> <span class="value">3000</span>
+
+<span class="comment"># Define the command to run</span>
+<span class="instruction">CMD</span> <span class="value">["node", "server.js"]</span>
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- VM vs Container -->
+    <section>
+        <div class="section-title">
+            <h2>Containers vs Virtual Machines</h2>
+            <p>Understanding the key differences</p>
+        </div>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Containers</th>
+                    <th>Virtual Machines</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Boot Time</td>
+                    <td>Seconds</td>
+                    <td>Minutes</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Megabytes</td>
+                    <td>Gigabytes</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Near native</td>
+                    <td>Limited by hypervisor</td>
+                </tr>
+                <tr>
+                    <td>Isolation</td>
+                    <td>Process level</td>
+                    <td>Complete isolation</td>
+                </tr>
+                <tr>
+                    <td>OS Support</td>
+                    <td>Shares host kernel</td>
+                    <td>Any OS</td>
+                </tr>
+                <tr>
+                    <td>Resource Usage</td>
+                    <td>Lightweight</td>
+                    <td>Resource intensive</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Installation Section -->
+    <div class="install-section" id="install">
+        <div class="section-title">
+            <h2>Install Docker</h2>
+            <p>Get Docker on your preferred platform</p>
+        </div>
+        <div class="install-grid">
+            <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" class="install-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/512px-Windows_logo_-_2012.svg.png" alt="Windows">
+                <h3>Windows</h3>
+                <p>Docker Desktop for Windows</p>
+            </a>
+            <a href="https://docs.docker.com/desktop/install/mac-install/" target="_blank" class="install-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/MacOS_logo.svg/512px-MacOS_logo.svg.png" alt="macOS">
+                <h3>macOS</h3>
+                <p>Docker Desktop for Mac</p>
+            </a>
+            <a href="https://docs.docker.com/desktop/install/linux-install/" target="_blank" class="install-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/512px-Tux.svg.png" alt="Linux">
+                <h3>Linux</h3>
+                <p>Docker Engine for Linux</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <section>
+        <div class="quick-links">
+            <div class="section-title">
+                <h2>Quick Reference Links</h2>
+                <p>Jump to specific documentation sections</p>
+            </div>
+            <div class="quick-links-grid">
+                <a href="https://docs.docker.com/get-started/" target="_blank" class="quick-link">
+                    <span>📚</span> Getting Started Guide
+                </a>
+                <a href="https://docs.docker.com/compose/" target="_blank" class="quick-link">
+                    <span>🔗</span> Docker Compose Docs
+                </a>
+                <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank" class="quick-link">
+                    <span>📋</span> Dockerfile Best Practices
+                </a>
+                <a href="https://docs.docker.com/engine/reference/run/" target="_blank" class="quick-link">
+                    <span>▶️</span> Docker Run Reference
+                </a>
+                <a href="https://docs.docker.com/storage/" target="_blank" class="quick-link">
+                    <span>💾</span> Storage & Volumes
+                </a>
+                <a href="https://docs.docker.com/network/" target="_blank" class="quick-link">
+                    <span>🌐</span> Networking Guide
+                </a>
+                <a href="https://docs.docker.com/engine/security/" target="_blank" class="quick-link">
+                    <span>🔒</span> Security Documentation
+                </a>
+                <a href="https://docs.docker.com/config/daemon/" target="_blank" class="quick-link">
+                    <span>⚙️</span> Daemon Configuration
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources">
+        <div class="section-title">
+            <h2>Official Resources</h2>
+            <p>Explore more Docker resources and documentation</p>
+        </div>
+        <div class="resources-grid">
+            <a href="https://docs.docker.com/" target="_blank" class="resource-card">
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Docs">
+                <h3>Official Documentation</h3>
+                <p>Comprehensive guides and references for all Docker products and features.</p>
+                <span class="resource-link">docs.docker.com →</span>
+            </a>
+            <a href="https://hub.docker.com/" target="_blank" class="resource-card">
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Hub">
+                <h3>Docker Hub</h3>
+                <p>The world's largest container registry. Find and share container images.</p>
+                <span class="resource-link">hub.docker.com →</span>
+            </a>
+            <a href="https://www.docker.com/blog/" target="_blank" class="resource-card">
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Blog">
+                <h3>Docker Blog</h3>
+                <p>Latest news, updates, tutorials, and best practices from Docker.</p>
+                <span class="resource-link">docker.com/blog →</span>
+            </a>
+            <a href="https://github.com/docker" target="_blank" class="resource-card">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+                <h3>Docker on GitHub</h3>
+                <p>Explore Docker's open source projects and contribute to the community.</p>
+                <span class="resource-link">github.com/docker →</span>
+            </a>
+            <a href="https://www.docker.com/community/" target="_blank" class="resource-card">
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Community">
+                <h3>Community</h3>
+                <p>Join the Docker community forums, events, and meetups.</p>
+                <span class="resource-link">Community Hub →</span>
+            </a>
+            <a href="https://training.docker.com/" target="_blank" class="resource-card">
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Training">
+                <h3>Docker Training</h3>
+                <p>Official Docker training courses and certification programs.</p>
+                <span class="resource-link">training.docker.com →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Cheat Sheet Section -->
+    <section>
+        <div class="section-title">
+            <h2>Docker Cheat Sheet</h2>
+            <p>Quick reference for common operations</p>
+        </div>
+        <div class="commands-grid">
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>🖼️ Image Commands</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker images              # List images
+docker rmi image_id        # Remove image
+docker image prune         # Remove unused
+docker tag src dst         # Tag an image
+docker push image          # Push to registry</div>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>📦 Container Commands</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker ps                  # List running
+docker ps -a               # List all
+docker start/stop id       # Start/Stop
+docker restart id          # Restart
+docker rm id               # Remove</div>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>💾 Volume Commands</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker volume ls           # List volumes
+docker volume create name  # Create volume
+docker volume rm name      # Remove volume
+docker volume prune        # Remove unused
+docker volume inspect name # Inspect</div>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>🌐 Network Commands</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker network ls          # List networks
+docker network create name # Create network
+docker network rm name     # Remove network
+docker network connect     # Connect container
+docker network inspect     # Inspect</div>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>🔗 Docker Compose</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker compose up -d       # Start services
+docker compose down        # Stop services
+docker compose logs        # View logs
+docker compose ps          # List services
+docker compose build       # Build images</div>
+                </div>
+            </div>
+            <div class="command-card">
+                <div class="command-header">
+                    <h4>🧹 Cleanup Commands</h4>
+                </div>
+                <div class="command-body">
+                    <div class="command-code">docker system prune        # Clean all
+docker container prune     # Clean containers
+docker image prune -a      # Clean all images
+docker volume prune        # Clean volumes
+docker system df           # Disk usage</div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem;">
+            <a href="https://docs.docker.com/get-started/docker_cheatsheet.pdf" target="_blank" class="btn btn-primary">Download Full Cheat Sheet (PDF) →</a>
+        </p>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Docker Documentation. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="https://docs.docker.com/get-started/" target="_blank">Get Started</a></li>
+                    <li><a href="https://docs.docker.com/desktop/" target="_blank">Docker Desktop</a></li>
+                    <li><a href="https://docs.docker.com/engine/" target="_blank">Docker Engine</a></li>
+                    <li><a href="https://docs.docker.com/compose/" target="_blank">Docker Compose</a></li>
+                    <li><a href="https://docs.docker.com/build/" target="_blank">Docker Build</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a></li>
+                    <li><a href="https://hub.docker.com/" target="_blank">Docker Hub</a></li>
+                    <li><a href="https://www.docker.com/products/docker-scout/" target="_blank">Docker Scout</a></li>
+                    <li><a href="https://www.docker.com/products/docker-build-cloud/" target="_blank">Build Cloud</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Developers</h4>
+                <ul>
+                    <li><a href="https://docs.docker.com/reference/" target="_blank">Reference Docs</a></li>
+                    <li><a href="https://docs.docker.com/samples/" target="_blank">Samples</a></li>
+                    <li><a href="https://docs.docker.com/language/" target="_blank">Language Guides</a></li>
+                    <li><a href="https://docs.docker.com/develop/" target="_blank">Development Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="https://forums.docker.com/" target="_blank">Forums</a></li>
+                    <li><a href="https://www.docker.com/docker-community-slack/" target="_blank">Slack</a></li>
+                    <li><a href="https://www.docker.com/community/captains/" target="_blank">Docker Captains</a></li>
+                    <li><a href="https://www.docker.com/community/meetups/" target="_blank">Meetups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Docker Documentation Hub. Docker and the Docker logo are trademarks of Docker, Inc.</p>
+            <div class="social-links">
+                <a href="https://twitter.com/docker" target="_blank" title="Twitter">𝕏</a>
+                <a href="https://github.com/docker" target="_blank" title="GitHub">⌘</a>
+                <a href="https://www.linkedin.com/company/docker" target="_blank" title="LinkedIn">in</a>
+                <a href="https://www.youtube.com/docker" target="_blank" title="YouTube">▶</a>
+            </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top -->
+    <a href="#" class="scroll-top" title="Back to top">↑</a>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Show/hide scroll to top button
+        const scrollTop = document.querySelector('.scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTop.style.display = 'flex';
+            } else {
+                scrollTop.style.display = 'none';
+            }
+        });
+
+        // Initially hide the button
+        scrollTop.style.display = 'none';
+    </script>
 </body>
 </html>
