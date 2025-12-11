@@ -1,9 +1,25 @@
-name: my-web-server
+name: app-with-monitor
 
 services:
-  myweb:                     # Name of the service
-    image: nginx:alpine    # The image to download and use
+  # Service 1: The Web Server
+  my-website:
+    image: nginx:alpine
     ports:
-      - "3000:80"          # Map Host Port (8080) -> Container Port (80)
+      - "3000:80"
     volumes:
-      - ./index.html:/usr/share/nginx/html/index.html  # Mount our file into the container
+      - ./index.html:/usr/share/nginx/html/index.html
+
+  # Service 2: The Auditor (New!)
+  auditor:
+    image: alpine:latest
+    # The command below installs 'curl' and runs a loop to check the site
+    command: >
+      sh -c "apk add --no-cache curl && 
+      while true; do 
+        echo 'Auditor says: Checking site status...'; 
+        curl -s http://my-website; 
+        echo '---'; 
+        sleep 5; 
+      done"
+    depends_on:
+      - my-website
