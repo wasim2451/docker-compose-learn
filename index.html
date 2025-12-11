@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        header {
+            background: #2496ed;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+        h1, h2, h3 {
+            color: #2496ed;
+        }
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+        .section {
+            padding: 2rem 0;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        .links {
+            list-style: none;
+            padding: 0;
+        }
+        .links li {
+            margin: 1rem 0;
+        }
+        .links a {
+            color: #2496ed;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: #2496ed;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://logo.svgcdn.com/logos/docker.png" alt="Docker Logo" class="logo">
+            <h1>Docker Documentation</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Welcome to Docker Documentation</h2>
+            <p>
+                Docker is a platform for developing, shipping, and running applications in containers.
+                Containers allow you to package an application with all its dependencies into a standardized unit,
+                ensuring that your application runs consistently in any environment.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>What is Docker?</h2>
+            <p>
+                Docker is an open platform for developing, shipping, and running applications.
+                It enables you to separate your applications from your infrastructure so you can deliver software quickly.
+                With Docker, you can manage your infrastructure in the same ways you manage your applications.
+            </p>
+            <p>
+                Docker provides the ability to package and run an application in a loosely isolated environment called a container.
+                The isolation and security allow you to run many containers simultaneously on a given host.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Docker Architecture</h2>
+            <p>
+                Docker uses a client-server architecture. The Docker client talks to the Docker daemon,
+                which does the heavy lifting of building, running, and distributing your Docker containers.
+                The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon.
+            </p>
+            <img src="https://docs.docker.com/get-started/images/docker-architecture.webp" alt="Docker Architecture Diagram">
+            <p>
+                The Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes.
+                A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker is configured to look for images on Docker Hub by default.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Containers:</strong> Lightweight, portable, and self-sufficient environments for running applications.</li>
+                <li><strong>Images:</strong> Read-only templates used to create containers.</li>
+                <li><strong>Docker Hub:</strong> A cloud-based registry service for sharing and managing container images.</li>
+                <li><strong>Docker Compose:</strong> A tool for defining and running multi-container Docker applications.</li>
+                <li><strong>Docker Swarm:</strong> Native clustering for Docker, turning a pool of Docker hosts into a single, virtual Docker host.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Further Reading & Resources</h2>
+            <ul class="links">
+                <li><a href="https://docs.docker.com/get-started/docker-overview/" target="_blank">Docker Overview</a></li>
+                <li><a href="https://docs.docker.com/get-started/" target="_blank">Get Started with Docker</a></li>
+                <li><a href="https://docs.docker.com/engine/reference/commandline/cli/" target="_blank">Docker CLI Reference</a></li>
+                <li><a href="https://docs.docker.com/compose/" target="_blank">Docker Compose Documentation</a></li>
+                <li><a href="https://docs.docker.com/engine/swarm/" target="_blank">Docker Swarm Documentation</a></li>
+                <li><a href="https://hub.docker.com/" target="_blank">Docker Hub</a></li>
+                <li><a href="https://www.docker.com/community" target="_blank">Docker Community</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Docker Documentation. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
